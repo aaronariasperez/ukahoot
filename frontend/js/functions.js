@@ -17,3 +17,10 @@ function getCookie(name) {
     }
     return null;
 }
+
+function error(errorTitle, errorMessage){
+    setCookie('errortitle', errorTitle, 1)
+    setCookie('errormessage', errorMessage, 1)
+
+    window.location.href = "error.html";
+}
