@@ -67,11 +67,9 @@ $(document).ready(function (){
             return;
         }
 
-        var expires = new Date()
-        expires.setMinutes(expires.getMinutes() + 15)
-        document.cookie = 'nickname='+nickname+'; expires='+expires
-        document.cookie = 'pollid='+pollid+'; expires='+expires
-        document.cookie = 'token='+token+'; expires='+expires
+        setCookie('nickname', nickname, 15)
+        setCookie('pollid', pollid, 15)
+        setCookie('token', token, 15)
         console.log(document.cookie)
 
         // Navigate to go! page
