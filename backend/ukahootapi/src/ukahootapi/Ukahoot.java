@@ -47,15 +47,7 @@ public class Ukahoot {
 		//PollJSON poll = new PollJSON();
 	}
 	
-	@GET
-	@Path("/getdemierda")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String getDeMierda() {
-		return "Ahi llevas hijo de puta";
-	}
-	
 	//*****JUGAR ENCUESTA******
-	
 	@POST
 	@Path("/play")
 	@Consumes(MediaType.APPLICATION_JSON)
