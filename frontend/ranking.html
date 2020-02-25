@@ -15,18 +15,20 @@
 </head>
 <body>
     <ion-content>
-        <ion-toolbar color="primary">
-            <ion-header>
-                <ion-title class="ion-text-center">Poll <span id="pollNameTitle"></span> score ranking</ion-title>
-            </ion-header>
-        </ion-toolbar>
+        
+        <ion-header>
+            <ion-toolbar class="ion-text-center" color="primary">
+                <ion-title>Poll <span id="pollNameTitle"></span> score ranking</ion-title>
+            </ion-toolbar>
+        </ion-header>
+        
 
         <ion-item>
             <ion-text color="dark"><h1>High scores</h1></ion-text>
         </ion-item>
 
         <div class="ion-padding">
-            <ion-grid class="my-grid"></ion-grid>
+            <ion-grid id="highScoresList" class="my-grid"></ion-grid>
         </div>
     </ion-content>
 </body>

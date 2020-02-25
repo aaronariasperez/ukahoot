@@ -38,8 +38,8 @@ function displayLoginError(error){
 
 function validateRankingInput(pollid){
     clearErrors()
-    var valir = true
-    if (pollid == null || pollid.length <= 5){
+    var valid = true
+    if (pollid == null || pollid.length <= 0){
         displayError('You must provide a valid poll identifier.')
         valid = false
     }
@@ -82,8 +82,8 @@ $(document).ready(function (){
         var pollid = $('#pollidInput').val()
         if (!validateRankingInput(pollid)) return;
 
-        setCookie('pollid', pollid, 15)
-        window.location.href = "poll.html";
+        setCookie('pollid', pollid, 15) 
+        window.location.href = "ranking.html";
     })
 
     $('#goBtn').click(function(){
