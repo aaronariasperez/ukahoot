@@ -35,12 +35,10 @@ function nextQuestion(currentQuestion, maxQuestions, questions){
 
 
 function submitPoll(userAnswers){
-    console.log(userAnswers)
-
     userAnswers.apikey = getCookie('token')
     userAnswers.user_name = getCookie('nickname')
 
-    var uriEnviarRespuestas='http://localhost:8080/ukahootapi/demo/hello/enviar_respuestas'
+    var uriEnviarRespuestas='http://localhost:8080/ukahootapi/public/api/enviar_respuestas'
 
     $.ajax({
         url:uriEnviarRespuestas,
@@ -54,22 +52,17 @@ function submitPoll(userAnswers){
             console.log(data)
         },
         error:function (textStatus){
-            console.log(textStatus)
-            //error('Error', textStatus)
+            error('Error', textStatus)
         }
     })
 
-    console.log(getCookie('nickname'))
-    console.log(getCookie('pollid'))
-    console.log(getCookie('token'))
-    alert()
     window.location.href = "ranking.html";
 }
 
 $(document).ready(function (){
     assertCookies()
     
-    var uriPlay = "http://localhost:8080/ukahootapi/demo/hello/play"
+    var uriPlay = "http://localhost:8080/ukahootapi/public/api/play"
 
     var nickname = getCookie('nickname')
     var pollid = getCookie('pollid')

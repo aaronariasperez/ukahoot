@@ -8,7 +8,7 @@ function assertCookies() {
 $(document).ready(function (){
     assertCookies()
 
-    var uriRanking = "http://localhost:8080/ukahootapi/demo/hello/ranking/"
+    var uriRanking = "http://localhost:8080/ukahootapi/public/api/ranking/"
 
     var pollid = getCookie('pollid')
     var rankData = {}
@@ -20,11 +20,9 @@ $(document).ready(function (){
         async:false,
         success:function (data){
             rankData = data
-            console.log(data)
         },
         error:function (textStatus){
-            //error('Error', textStatus)
-            console.log(textStatus)
+            error('Error', textStatus)
         }
     })
 

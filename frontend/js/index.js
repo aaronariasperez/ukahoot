@@ -21,14 +21,12 @@ function initComponents(){
 }
 
 function displayError(error){
-    console.log(error)
     var errorList = $('#errorList')
     errorList.append('<ion-item><ion-text color="danger">'+error+'</ion-text></ion-item>')
     errorList.show()
 }
 
 function displayLoginError(error){
-    console.log(error)
     var errorList = $('#loginErrorList')
     errorList.append('<ion-item><ion-text color="danger">'+error+'</ion-text></ion-item>')
     errorList.show()
@@ -76,8 +74,8 @@ $(document).ready(function (){
     clearCookies()
     initComponents()
 
-    var uriApikey = "http://localhost:8080/ukahootapi/demo/hello/getApikey"
-    var uriAuth = "http://localhost:8080/ukahootapi/demo/hello/auth"
+    var uriApikey = "http://localhost:8080/ukahootapi/public/api/getApikey"
+    var uriAuth = "http://localhost:8080/ukahootapi/public/api/auth"
 
     $('#rankingBtn').click(function (){
         var pollid = $('#pollidInput').val()
@@ -139,9 +137,6 @@ $(document).ready(function (){
 
         setCookie('username', username, 15)
         setCookie('token', token, 15)
-        console.log(getCookie('username'))
-        console.log(getCookie('token'))
-        alert()
         window.location.href = "dashboard.html";
     })
 })

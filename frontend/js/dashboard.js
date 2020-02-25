@@ -101,7 +101,7 @@ $(document).ready(function (){
     var username = getCookie('username')
     var token = getCookie('token')
 
-    var uriEncuesta = "http://localhost:8080/ukahootapi/demo/hello/encuesta"
+    var uriEncuesta = "http://localhost:8080/ukahootapi/public/api/encuesta"
 
     initComponents(username)
     
@@ -159,16 +159,12 @@ $(document).ready(function (){
             contentType:"application/json",
             data:JSON.stringify(pollData),
             success:function (data){
-                console.log(data)
                 pollData.poll_id = data.poll_id
             },
             error:function (textStatus){
-                //error('Error', textStatus)
-                console.log(textStatus)
+                error('Error', textStatus)
             }
         })
-
-        console.log(pollData)
 
         displayPoll(pollData, pollCounter)
         clearSubmitPollInput()
