@@ -41,15 +41,7 @@ function validateGoInput(nickname, pollid){
 }
 
 $(document).ready(function (){
-    /* cookie snippet
-    var date = new Date()
-    date.setMinutes(date.getMinutes() + 5)
-    console.log('username=John Doe; expires=' + date)
-    document.cookie = 'username=John Doe; expires=' + date
-    */
-
     clearCookies()
-
     initComponents()
 
     $('#rankingBtn').click(function (){
@@ -63,9 +55,7 @@ $(document).ready(function (){
         
         var nickname = $('#nicknameInput').val()
         var pollid = $('#pollidInput').val()
-        if (!validateGoInput(nickname, pollid)){
-            return;
-        }
+        if (!validateGoInput(nickname, pollid)) return;
 
         setCookie('nickname', nickname, 15)
         setCookie('pollid', pollid, 15)
