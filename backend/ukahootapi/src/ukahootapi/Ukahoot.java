@@ -3,7 +3,6 @@ package ukahootapi;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -15,8 +14,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
 import org.jose4j.jwk.JsonWebKey;
 import org.jose4j.jwk.RsaJsonWebKey;
@@ -48,7 +45,13 @@ public class Ukahoot {
 		userRegistered_map.put(user.getUser(), user);
 		
 		//PollJSON poll = new PollJSON();
-		
+	}
+	
+	@GET
+	@Path("/getdemierda")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String getDeMierda() {
+		return "Ahi llevas hijo de puta";
 	}
 	
 	//*****JUGAR ENCUESTA******
@@ -112,6 +115,7 @@ public class Ukahoot {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
+	//public Response auth(UserRegisteredJSON user_input) 
 	public MessageJSON auth(UserRegisteredJSON user_input) 
 		throws JsonGenerationException, JsonMappingException, IOException{
 		
@@ -147,6 +151,16 @@ public class Ukahoot {
 			MessageJSON msj = new MessageJSON();
 			msj.setMessage("Token creado");
 			msj.setToken(jwt);
+			
+			
+			/*
+			Response resp = Response.status(200)
+		      
+		      .entity(msj)
+		      .build();
+			*/
+			
+			
 			return msj;
 		}else {
 			return null;

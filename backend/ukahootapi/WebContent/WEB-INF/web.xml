@@ -11,7 +11,7 @@
 	</servlet-class>
 		<init-param>
 			<param-name>jersey.config.server.provider.packages</param-name>
-			<param-value> ukahootapi,com.fasterxml.jackson.jaxrs.json
+			<param-value>ukahootapi,com.fasterxml.jackson.jaxrs.json
 			</param-value>
 		</init-param>
 	</servlet>
@@ -20,4 +20,38 @@
 		<servlet-name>My REST service</servlet-name>
 		<url-pattern>/demo/*</url-pattern>
 	</servlet-mapping>
+		
+	<security-constraint>
+		<display-name>Secure REST</display-name>
+		<web-resource-collection>
+			<web-resource-name>Ukahoot REST service</web-resource-name>
+			<url-pattern>/*</url-pattern>
+			<http-method-omission>GET</http-method-omission>
+			<http-method-omission>POST</http-method-omission>
+			<http-method-omission>PUT</http-method-omission>
+			<http-method-omission>DELETE</http-method-omission>
+			<http-method-omission>OPTIONS</http-method-omission>
+		</web-resource-collection>
+		<auth-constraints/>
+	</security-constraint>	
+	<security-constraint>
+		<display-name>Secure REST</display-name>
+		<web-resource-collection>
+			<web-resource-name>Ukahoot REST service</web-resource-name>
+			<url-pattern>/*</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+			<http-method>PUT</http-method>
+			<http-method>DELETE</http-method>
+			<http-method>OPTIONS</http-method>
+		</web-resource-collection>
+	</security-constraint>
+	<filter>
+	  <filter-name>CorsFilter</filter-name>
+	  <filter-class>ukahootapi.CorsFilter</filter-class>
+	</filter>
+	<filter-mapping>
+	  <filter-name>CorsFilter</filter-name>
+	  <url-pattern>/*</url-pattern>
+	</filter-mapping>
 </web-app>
