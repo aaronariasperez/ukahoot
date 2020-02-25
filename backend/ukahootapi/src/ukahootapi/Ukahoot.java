@@ -3,7 +3,6 @@ package ukahootapi;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -30,7 +29,7 @@ import org.jose4j.lang.JoseException;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-@Path("/hello")
+@Path("/api")
 public class Ukahoot {
 	private static Map<String, UserRegisteredJSON> userRegistered_map = new HashMap<String, UserRegisteredJSON>();
 	private static Map<String, UserPlayerJSON> userPlayer_map= new HashMap<String, UserPlayerJSON>();
@@ -110,8 +109,7 @@ public class Ukahoot {
 			return response;
 		}else {
 			EnviarEncuestaReponseJSON response = new EnviarEncuestaReponseJSON();
-			response.setResponse("Acceso denegado por no coincidencia con la api");
-			
+			response.setResponse("Acceso denegado");
 			return response;
 		}
 	}
@@ -131,7 +129,7 @@ public class Ukahoot {
 			UserRegisteredJSON user = userRegistered_map.get(user_input.getUser());
 			RsaJsonWebKey jwk = null;
 			try {
-				jwk= RsaJwkGenerator.gener)ateJwk(2048); 
+				jwk= RsaJwkGenerator.generateJwk(2048); 
 				jwk.setKeyId("1");
 			} catch (JoseException e) {   
 				e.printStackTrace();  
@@ -160,20 +158,10 @@ public class Ukahoot {
 			msj.setMessage("Token creado");
 			msj.setToken(jwt);
 			
-			
-			/*
-			Response resp = Response.status(200)
-		      
-		      .entity(msj)
-		      .build();
-			*/
-			
-			
 			return msj;
 		}else {
 			return null;
-		}
-		
+		}	
 	}
 
 	@POST 
