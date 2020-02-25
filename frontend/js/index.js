@@ -59,7 +59,9 @@ function validateLoginInput(username, password){
     }
     if (password == null || password.length <= 6){
         displayLoginError('You must provide a password larger than 6 characters.')
+        valid = false
     }
+    return valid
 }
 
 $(document).ready(function (){
