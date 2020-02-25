@@ -36,6 +36,16 @@ function displayLoginError(error){
     errorList.show()
 }
 
+function validateRankingInput(pollid){
+    clearErrors()
+    var valir = true
+    if (pollid == null || pollid.length <= 5){
+        displayError('You must provide a valid poll identifier.')
+        valid = false
+    }
+    return valid
+}
+
 function validateGoInput(nickname, pollid){
     clearErrors()
     var valid = true
@@ -68,9 +78,12 @@ $(document).ready(function (){
     clearCookies()
     initComponents()
 
-    //TODO: RANKING
     $('#rankingBtn').click(function (){
-        alert('ranking!')
+        var pollid = $('#pollidInput').val()
+        if (!validateRankingInput(pollid)) return;
+
+        setCookie('pollid', pollid, 15)
+        window.location.href = "poll.html";
     })
 
     $('#goBtn').click(function(){
