@@ -37,7 +37,9 @@ function nextQuestion(currentQuestion, maxQuestions, questions){
 function submitPoll(userAnswers){
     console.log(userAnswers)
 
-    window.location.href = "index.html";
+    //TODO LLamada POST /encuesta/{id} con userAnswers
+    //TODO Navegar a ranking.html con las cookies pertinentes
+    window.location.href = "ranking.html";
 }
 
 $(document).ready(function (){
