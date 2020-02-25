@@ -65,14 +65,15 @@ $(document).ready(function (){
         url:uriPlay,
         type:"POST",
         crossDomain:true,
+        async:false,
         dataType:"json",
         contentType:"application/json",
         data:JSON.stringify( {"token":token, "poll_id":pollid}),
         success:function (data){
             pollData = data
         },
-        error:function (xhr, textStatus){
-            error('Error '+xhr.status, textStatus)
+        error:function (textStatus){
+            error('Error', textStatus)
         }
     })
 

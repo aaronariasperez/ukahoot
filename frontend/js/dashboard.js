@@ -76,17 +76,12 @@ function clearQuestionInput(){
 function displayQuestion(questionData, questionCounter){
     $('#questionsList').append('<ion-item><ion-text color="dark">'+questionCounter+'. '+questionData.question_name+'</ion-text><ion-item>')
 }
-/*
+
 function clearSubmitPollErrors(){
-    $('#submitPollErrorList').html('')
-    $('#submitPollErrorList').hide()
+    clearNewPollError()
+    clearSubmitQuestionErrors()
 }
 
-function displaySubmitPollError(error){
-    $('#submitPollErrorList').append('<ion-item><ion-text color="danger">'+error+"</ion-text></ion-item>")
-    $('#submitPollErrorList').show()
-}
-*/
 function clearSubmitPollInput(){
     clearQuestionInput()
     $('#pollNameInput').val('')
@@ -147,10 +142,23 @@ $(document).ready(function (){
     })
 
     $('#submitPollBtn').click(function(){
-        //clearSubmitPollErrors()
-
-        //TODO: llamar POST /encuesta
-        //TODO: pollCounter.poll_id = response.poll_id
+        clearSubmitPollErrors()
+        
+        $.ajax({
+            url:uriApiKey,
+            type:"POST",
+            crossDomain:true,
+            async:false,
+            dataType:"json",
+            contentType:"application/json",
+            data:JSON.stringify(pollData),
+            success:function (data){
+                pollCounter = response.poll_id
+            },
+            error:function (textStatus){
+                error('Error', textStatus)
+            }
+        })
 
         console.log(pollData)
 

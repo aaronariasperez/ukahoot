@@ -97,14 +97,15 @@ $(document).ready(function (){
             url:uriApiKey,
             type:"POST",
             crossDomain:true,
+            async:false,
             dataType:"json",
             contentType:"application/json",
             data:JSON.stringify( {"username":nickname, "poll_id":pollid}),
             success:function (data){
                 token = data.apikey
             },
-            error:function (xhr, textStatus){
-                error('Error '+xhr.status, textStatus)
+            error:function (textStatus){
+                error('Error', textStatus)
             }
         })
 
@@ -119,25 +120,28 @@ $(document).ready(function (){
         var username = $('#mgrUsername').val()
         var password = $('#mgrPassword').val()
         if (!validateLoginInput(username, password)) return;
+        
         var token = ''
-
         $.ajax({
             url:uriAuth,
             type:"POST",
             crossDomain:true,
+            async:false,
             dataType:"json",
             contentType:"application/json",
             data:JSON.stringify( {"user":username, "pass":password}),
             success:function (data){
                 token = data.token
             },
-            error:function (xhr, textStatus){
-                error('Error '+xhr.status, textStatus)
+            error:function (textStatus){
+                error('Error', textStatus)
             }
         })
 
         setCookie('username', username, 15)
         setCookie('token', token, 15)
+        console.log(getCookie('username'))
+        console.log(getCookie('token'))
         window.location.href = "dashboard.html";
     })
 })

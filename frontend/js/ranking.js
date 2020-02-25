@@ -8,33 +8,23 @@ function assertCookies() {
 $(document).ready(function (){
     assertCookies()
 
-    var uriRanking = "http://localhost:8080/ukahootapi/demo/hello/ranking"
+    var uriRanking = "http://localhost:8080/ukahootapi/demo/hello/ranking/"
 
     var pollid = getCookie('pollid')
+    var rankData = {}
 
-    //TODO: Llamada a GET /ranking/{pollid}
     $.ajax({
-        url:uriAuth,
+        url:(uriRanking+pollid),
         type:"GET",
         crossDomain:true,
+        async:false,
         success:function (data){
-            token = data.apikey
+            rankData = data
         },
-        error:function (xhr, textStatus){
-            error('Error '+xhr.status, textStatus)
+        error:function (textStatus){
+            error('Error', textStatus)
         }
     })
-
-    var rankData = {
-        poll_name:'prueba',
-        ranks:[
-            {user_name:'nabaso', score:1234},
-            {user_name:'nabaso', score:1234},
-            {user_name:'nabaso', score:1234},
-            {user_name:'nabaso', score:1234},
-            {user_name:'nabaso', score:1234}
-        ]
-    }
 
     $('#pollNameTitle').text(rankData.poll_name)
 
