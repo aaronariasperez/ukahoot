@@ -6,11 +6,24 @@ function assertCookies() {
 }
 
 $(document).ready(function (){
-    //TODO: descomentame assertCookies()
+    assertCookies()
+
+    var uriRanking = "http://localhost:8080/ukahootapi/demo/hello/ranking"
 
     var pollid = getCookie('pollid')
 
     //TODO: Llamada a GET /ranking/{pollid}
+    $.ajax({
+        url:uriAuth,
+        type:"GET",
+        crossDomain:true,
+        success:function (data){
+            token = data.apikey
+        },
+        error:function (xhr, textStatus){
+            error('Error '+xhr.status, textStatus)
+        }
+    })
 
     var rankData = {
         poll_name:'prueba',

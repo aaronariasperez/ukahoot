@@ -45,9 +45,12 @@ $(document).ready(function (){
 
     assertCookies()
 
-    var pollid = getCookie('pollid')
+    var uriPlay = "http://localhost:8080/ukahootapi/demo/hello/play"
 
-    // TODO: Llamada GET /encuesta/{id}
+    var nickname = getCookie('username')
+    var pollid = getCookie('pollid')
+    var token = getCookie('token')
+    
     var pollData = {
         poll_id: '99999',
         poll_name:'Encuesta de prueba',
@@ -57,6 +60,21 @@ $(document).ready(function (){
             {question_name:'Question 3', question:'This is the question 3', answer1:'answer3.1', answer2:'answer3.2', answer3:'answer3.3', answer4:'answer3.4'}
         ]
     }
+
+    $.ajax({
+        url:uriPlay,
+        type:"POST",
+        crossDomain:true,
+        dataType:"json",
+        contentType:"application/json",
+        data:JSON.stringify( {"token":token, "poll_id":pollid}),
+        success:function (data){
+            pollData = data
+        },
+        error:function (xhr, textStatus){
+            error('Error '+xhr.status, textStatus)
+        }
+    })
 
     initComponents(pollData)
     fillQuestionForm(pollData.questions[0])

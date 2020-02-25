@@ -8,9 +8,10 @@ function assertCookies() {
         error('Forbidden access', 'Area restricted. Invalid session token.')
 }
 
-function initComponents(){
+function initComponents(username){
     $('#questionForm').hide()
     clearNewPollError()
+    $('#usernameTitle').text(username)
 }
 
 function clearNewPollError(){
@@ -100,12 +101,12 @@ function displayPoll(pollData, pollCounter){
 }
 
 $(document).ready(function (){
-    //TODO: Activar assertCookies
-    //assertCookies()
-    initComponents()
+    assertCookies()
 
     var username = getCookie('username')
     var token = getCookie('token')
+
+    initComponents(username)
     
     var pollData = {
         poll_id:'',
