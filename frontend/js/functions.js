@@ -4,7 +4,11 @@ function setCookie(cookieName, cookieValue, expiresInMinutes){
     document.cookie = cookieName+'='+cookieValue+'; expires='+expires
 }
 
-function getCookie(name) {
+function killCookie(name){
+    setCookie(name, 'any', -1)
+}
+
+function getCookie(name){
     var nameEQ = name + "=";
     //alert(document.cookie);
     var ca = document.cookie.split(';');
