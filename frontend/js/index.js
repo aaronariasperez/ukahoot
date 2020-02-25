@@ -51,7 +51,7 @@ function validateGoInput(nickname, pollid){
         displayError('You must provide a nickname.')
         valid = false
     }
-    if (pollid == null || pollid.length <= 5){
+    if (pollid == null || pollid.length <= 0){
         displayError('You must provide a valid poll identifier.')
         valid = false
     }
@@ -76,7 +76,7 @@ $(document).ready(function (){
     clearCookies()
     initComponents()
 
-    var uriApikey = "http://localhost:8080/ukahootapi/demo/hello/apikey"
+    var uriApikey = "http://localhost:8080/ukahootapi/demo/hello/getApikey"
     var uriAuth = "http://localhost:8080/ukahootapi/demo/hello/auth"
 
     $('#rankingBtn').click(function (){
@@ -94,13 +94,13 @@ $(document).ready(function (){
 
         var token = ''
         $.ajax({
-            url:uriApiKey,
+            url:uriApikey,
             type:"POST",
             crossDomain:true,
             async:false,
             dataType:"json",
             contentType:"application/json",
-            data:JSON.stringify( {"username":nickname, "poll_id":pollid}),
+            data:JSON.stringify({"user_name":nickname, "poll_id":pollid}),
             success:function (data){
                 token = data.apikey
             },
@@ -112,7 +112,6 @@ $(document).ready(function (){
         setCookie('nickname', nickname, 15)
         setCookie('pollid', pollid, 15)
         setCookie('token', token, 15)
-        console.log(document.cookie)
         window.location.href = "poll.html";
     })
 
@@ -142,6 +141,7 @@ $(document).ready(function (){
         setCookie('token', token, 15)
         console.log(getCookie('username'))
         console.log(getCookie('token'))
+        alert()
         window.location.href = "dashboard.html";
     })
 })

@@ -90,7 +90,7 @@ function clearSubmitPollInput(){
 }
 
 function displayPoll(pollData, pollCounter){
-    $('#pollList').append('<ion-item><ion-text color="dark">'+pollCounter+'. '+pollData.poll_name+' - '+pollData.poll_id+'</ion-text><ion-item>')
+    $('#pollList').append('<ion-item><ion-text color="dark">'+(pollCounter+1)+'. '+pollData.poll_name+' - '+pollData.poll_id+'</ion-text><ion-item>')
     $('#pollList').show()
     $('#noPollsYetText').hide()
 }
@@ -100,6 +100,8 @@ $(document).ready(function (){
 
     var username = getCookie('username')
     var token = getCookie('token')
+
+    var uriEncuesta = "http://localhost:8080/ukahootapi/demo/hello/encuesta"
 
     initComponents(username)
     
@@ -145,18 +147,24 @@ $(document).ready(function (){
         clearSubmitPollErrors()
         
         $.ajax({
-            url:uriApiKey,
+            url:uriEncuesta,
             type:"POST",
             crossDomain:true,
             async:false,
+            headers:{
+                "token":token,
+                "user":username
+            },
             dataType:"json",
             contentType:"application/json",
             data:JSON.stringify(pollData),
             success:function (data){
-                pollCounter = response.poll_id
+                console.log(data)
+                pollData.poll_id = data.poll_id
             },
             error:function (textStatus){
-                error('Error', textStatus)
+                //error('Error', textStatus)
+                console.log(textStatus)
             }
         })
 
@@ -165,5 +173,10 @@ $(document).ready(function (){
         displayPoll(pollData, pollCounter)
         clearSubmitPollInput()
         pollCounter += 1
+        pollData = {
+            poll_id:'',
+            poll_name:'',
+            questions:[]
+        }
     })
 })

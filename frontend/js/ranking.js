@@ -20,9 +20,11 @@ $(document).ready(function (){
         async:false,
         success:function (data){
             rankData = data
+            console.log(data)
         },
         error:function (textStatus){
-            error('Error', textStatus)
+            //error('Error', textStatus)
+            console.log(textStatus)
         }
     })
 

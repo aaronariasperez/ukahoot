@@ -33,33 +33,49 @@ function nextQuestion(currentQuestion, maxQuestions, questions){
     return nextQuestion;
 }
 
+
 function submitPoll(userAnswers){
     console.log(userAnswers)
 
-    //TODO LLamada POST /encuesta/{id} con userAnswers
-    //TODO Navegar a ranking.html con las cookies pertinentes
+    userAnswers.apikey = getCookie('token')
+    userAnswers.user_name = getCookie('nickname')
+
+    var uriEnviarRespuestas='http://localhost:8080/ukahootapi/demo/hello/enviar_respuestas'
+
+    $.ajax({
+        url:uriEnviarRespuestas,
+        type:"POST",
+        crossDomain:true,
+        async:false,
+        dataType:"json",
+        contentType:"application/json",
+        data:JSON.stringify(userAnswers),
+        success:function (data){
+            console.log(data)
+        },
+        error:function (textStatus){
+            console.log(textStatus)
+            //error('Error', textStatus)
+        }
+    })
+
+    console.log(getCookie('nickname'))
+    console.log(getCookie('pollid'))
+    console.log(getCookie('token'))
+    alert()
     window.location.href = "ranking.html";
 }
 
 $(document).ready(function (){
-
     assertCookies()
-
+    
     var uriPlay = "http://localhost:8080/ukahootapi/demo/hello/play"
 
-    var nickname = getCookie('username')
+    var nickname = getCookie('nickname')
     var pollid = getCookie('pollid')
     var token = getCookie('token')
     
-    var pollData = {
-        poll_id: '99999',
-        poll_name:'Encuesta de prueba',
-        questions:[
-            {question_name:'Question 1', question:'This is the question 1', answer1:'answer1.1', answer2:'answer1.2', answer3:'answer1.3', answer4:'answer1.4'},
-            {question_name:'Question 2', question:'This is the question 2', answer1:'answer2.1', answer2:'answer2.2', answer3:'answer2.3', answer4:'answer2.4'},
-            {question_name:'Question 3', question:'This is the question 3', answer1:'answer3.1', answer2:'answer3.2', answer3:'answer3.3', answer4:'answer3.4'}
-        ]
-    }
+    var pollData = {}
 
     $.ajax({
         url:uriPlay,
@@ -68,7 +84,7 @@ $(document).ready(function (){
         async:false,
         dataType:"json",
         contentType:"application/json",
-        data:JSON.stringify( {"token":token, "poll_id":pollid}),
+        data:JSON.stringify( {"user_name":nickname, "poll_id":pollid, "apikey":token}),
         success:function (data){
             pollData = data
         },
