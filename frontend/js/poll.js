@@ -2,7 +2,6 @@
 function initComponents(pollData){
     $('#pollNameTitle').text(pollData.poll_name)
     $('#pollidTitle').text(pollData.poll_id)
-    fillQuestionForm(pollData.questions[0])
 }
 
 function fillQuestionForm(questionData){
@@ -27,14 +26,27 @@ function assertCookies() {
         error('Forbidden access', 'Area restricted. Invalid session token.')
 }
 
+function nextQuestion(currentQuestion, maxQuestions, questions){
+    var nextQuestion = currentQuestion + 1
+    if (nextQuestion < maxQuestions){
+        fillQuestionForm(questions[nextQuestion])
+    }
+    return nextQuestion;
+}
+
+function submitPoll(userAnswers){
+    console.log(userAnswers)
+
+    window.location.href = "index.html";
+}
+
 $(document).ready(function (){
 
-    //assertCookies()
+    assertCookies()
 
-    //var pollid = getCookie('pollid')
-    var pollid = 99999
+    var pollid = getCookie('pollid')
 
-    // Llamada GET /encuesta/{id}
+    // TODO: Llamada GET /encuesta/{id}
     var pollData = {
         poll_id: '99999',
         poll_name:'Encuesta de prueba',
@@ -46,6 +58,38 @@ $(document).ready(function (){
     }
 
     initComponents(pollData)
+    fillQuestionForm(pollData.questions[0])
 
-    $('#')
+    var userAnswers = {
+        poll_id:pollData.poll_id, 
+        answers: []
+    }
+
+    var maxQuestions = pollData.questions.length
+    var currentQuestion = 0;
+
+    $('#firstAnswerBtn').click(function (){
+        userAnswers.answers.push(1)
+        currentQuestion = nextQuestion(currentQuestion, maxQuestions, pollData.questions)
+        if (currentQuestion == maxQuestions)
+            submitPoll(userAnswers)
+    })
+    $('#secondAnswerBtn').click(function (){
+        userAnswers.answers.push(2)
+        currentQuestion = nextQuestion(currentQuestion, maxQuestions, pollData.questions)
+        if (currentQuestion == maxQuestions)
+            submitPoll(userAnswers)
+    })
+    $('#thirdAnswerBtn').click(function (){
+        userAnswers.answers.push(3)
+        currentQuestion = nextQuestion(currentQuestion, maxQuestions, pollData.questions)
+        if (currentQuestion == maxQuestions)
+            submitPoll(userAnswers)
+    })
+    $('#fourthAnswerBtn').click(function (){
+        userAnswers.answers.push(4)
+        currentQuestion = nextQuestion(currentQuestion, maxQuestions, pollData.questions)
+        if (currentQuestion == maxQuestions)
+            submitPoll(userAnswers)
+    })
 })
