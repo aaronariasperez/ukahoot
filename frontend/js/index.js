@@ -76,6 +76,9 @@ $(document).ready(function (){
     clearCookies()
     initComponents()
 
+    var uriApikey = "http://localhost:8080/ukahootapi/demo/hello/apikey"
+    var uriAuth = "http://localhost:8080/ukahootapi/demo/hello/auth"
+
     $('#rankingBtn').click(function (){
         var pollid = $('#pollidInput').val()
         if (!validateRankingInput(pollid)) return;
@@ -89,8 +92,21 @@ $(document).ready(function (){
         var pollid = $('#pollidInput').val()
         if (!validateGoInput(nickname, pollid)) return;
 
-        // TODO: Llamar a POST /apikey token
         var token = ''
+        $.ajax({
+            url:uriApiKey,
+            type:"POST",
+            crossDomain:true,
+            dataType:"json",
+            contentType:"application/json",
+            data:JSON.stringify( {"username":nickname, "poll_id":pollid}),
+            success:function (data){
+                token = data.apikey
+            },
+            error:function (xhr, textStatus){
+                error('Error '+xhr.status, textStatus)
+            }
+        })
 
         setCookie('nickname', nickname, 15)
         setCookie('pollid', pollid, 15)
@@ -103,9 +119,22 @@ $(document).ready(function (){
         var username = $('#mgrUsername').val()
         var password = $('#mgrPassword').val()
         if (!validateLoginInput(username, password)) return;
-
-        //TODO: Llamar a POST /auth
         var token = ''
+
+        $.ajax({
+            url:uriAuth,
+            type:"POST",
+            crossDomain:true,
+            dataType:"json",
+            contentType:"application/json",
+            data:JSON.stringify( {"user":username, "pass":password}),
+            success:function (data){
+                token = data.token
+            },
+            error:function (xhr, textStatus){
+                error('Error '+xhr.status, textStatus)
+            }
+        })
 
         setCookie('username', username, 15)
         setCookie('token', token, 15)
