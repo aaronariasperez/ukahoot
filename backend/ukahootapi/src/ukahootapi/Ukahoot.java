@@ -3,6 +3,7 @@ package ukahootapi;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -44,7 +45,32 @@ public class Ukahoot {
 	
 		userRegistered_map.put(user.getUser(), user);
 		
-		//PollJSON poll = new PollJSON();
+		PollJSON poll = new PollJSON();
+		poll.setPoll_id("0");
+		poll.setPoll_name("poll de prueba");
+		List<Question> questions = new ArrayList<Question>();
+		Question q1 = new Question();
+		q1.setQuestion("esta buenoe sto o que?");
+		q1.setQuestion_name("soy la primera pregunta");
+		q1.setAnswer1("ji qillo");
+		q1.setAnswer2("yo diria q no");
+		q1.setAnswer3("yo q se qillo");
+		q1.setAnswer4("ceguro");
+		q1.setSolution("3");
+		Question q2 = new Question();
+		q2.setQuestion("bueno y ahora q?");
+		q2.setQuestion_name("soy la segunda pregunta");
+		q2.setAnswer1("aaaro");
+		q2.setAnswer2("puto cors");
+		q2.setAnswer3("asdf");
+		q2.setAnswer4("zu puta madre");
+		q2.setSolution("2");
+		questions.add(q1);
+		questions.add(q2);
+		
+		poll.setQuestions(questions);
+		
+		polls_map.put("0", poll);
 	}
 	
 	//*****JUGAR ENCUESTA******
