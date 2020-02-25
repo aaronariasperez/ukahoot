@@ -25,9 +25,7 @@
                 <ion-row class="parent-row">
                     <ion-col size="4">
                         <ion-item>
-                            <ion-text color="dark">
-                                <h1>Make and share polls!</h1>
-                            </ion-text>
+                            <ion-text color="dark"><h1>Participate in polls!</h1></ion-text>
                         </ion-item>
                     </ion-col>
                 </ion-row>
@@ -35,9 +33,7 @@
                     <ion-col size="4">
                         <ion-card>
                             <ion-item>
-                                <ion-card-header>
-                                    <ion-card-title>Participate now</ion-card-title>
-                                </ion-card-header>
+                                <ion-card-header><ion-card-title>Need a name and invitation code</ion-card-title></ion-card-header>
                             </ion-item>
                             <ion-card-content>
                                 <ion-item>
@@ -59,9 +55,40 @@
                         </ion-card>
                     </ion-col>
                 </ion-row>
+                <ion-row class="parent-row">
+                    <ion-col size="4">
+                        <ion-item>
+                            <ion-text color="dark"><h1>Are you a poll manager?</h1></ion-text>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="parent-row">
+                    <ion-col size="4">
+                        <ion-card>
+                            <ion-item>
+                                <ion-card-header><ion-card-title>Just log in</ion-card-title></ion-card-header>
+                            </ion-item>
+                            <ion-card-content>
+                                <ion-item>
+                                    <ion-label position="floating" color="medium">User</ion-label>
+                                    <ion-input id="mgrUsername" type="text"></ion-input>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label position="floating" color="medium">Password</ion-label>
+                                    <ion-input id="mgrPassword" type="password"></ion-input>
+                                </ion-item>
+                                <div>
+                                    <ion-list id="loginErrorList"></ion-list>
+                                </div>
+                                <div class="ion-padding ion-text-right">
+                                    <ion-button id=loginBtn color="primary">Login</ion-button>
+                                </div>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
             </ion-grid>
         </div>
-            <a id="goLink" href="prueba.html"></a>
     </ion-content>
 </body>
 </html>
