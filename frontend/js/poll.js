@@ -19,9 +19,9 @@ function assertCookies() {
     var token = getCookie('token')
 
     if (nickname == null || nickname.length <= 0)
-        error('Invalid input', 'You must provide a nickname.')
+        error('Invalid input', 'Must provide a nickname.')
     if (pollid == null || pollid.length <= 0)
-        error('Invalid input', 'You must provide a valid poll identifier.')
+        error('Invalid input', 'Must provide a valid poll identifier.')
     if (token == null || token.length <= 5)
         error('Forbidden access', 'Area restricted. Invalid session token.')
 }

@@ -97,7 +97,6 @@ $(document).ready(function (){
         var token = ''
 
         setCookie('username', username, 15)
-        setCookie('password', password, 15)
         setCookie('token', token, 15)
         window.location.href = "dashboard.html";
     })
