@@ -11,11 +11,95 @@
     <link rel="stylesheet" href="css/styles.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src='js/functions.js'></script>
-    <script src='js/index.js'></script>
+    <script src='js/dashboard.js'></script>
 </head>
 <body>
     <ion-content>
-        Hey there! I'm dashboard.
+        <ion-header>
+            <ion-toolbar class="ion-text-center" color="primary">
+                <ion-title>Welcome <span id="usernameTitle"></span>! - Poll management area</ion-header-title>
+            </ion-toolbar>
+        </ion-header>
+        <div>
+            <ion-grid class="my-grid">
+                <ion-row class="parent-row">
+                    <ion-col size=8>
+                        <ion-item><ion-text><h1>Your polls</h1></ion-text></ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="parent-row">
+                    <ion-col class="ion-hide" size=6><ion-list id="pollList"></ion-list></ion-col>
+                </ion-row>
+                <ion-row class="parent-row ion-padding">
+                    <ion-col class="ion-text-center" size=6><ion-text color="dark">You don't have any polls yet!</ion-text></ion-col>
+                </ion-row>
+                <ion-row class="parent-row">
+                    <ion-col size=8>
+                        <ion-card>
+                            <ion-item>
+                                <ion-card-header><ion-card-title>Create a new poll</ion-card-title></ion-card-header>
+                            </ion-item>
+                            <ion-card-content>
+                                <ion-grid>
+                                    <ion-row>
+                                        <ion-col>
+                                            <ion-item>
+                                                <ion-label position="floating" color="medium">Poll name</ion-label>
+                                                <ion-input id="pollNameInput" type="text"></ion-input>
+                                            </ion-item>
+                                        </ion-col>
+                                        <ion-col>
+                                            <div class="ion-padding ion-text-right">
+                                                <ion-button id="newPollBtn" color="primary">Create poll</ion-button>
+                                            </div>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row>
+                                        <div id="questionsList" class="ion-padding"></div>
+                                    </ion-row>
+                                    <ion-row>
+                                        <ion-card class="ion-hide">
+                                            <ion-item>
+                                                <ion-card-header><ion-card-title>Question <span id="questionNumberTitle"></span> form</ion-card-title></ion-card-header>
+                                            </ion-item>
+                                            <ion-card-content>
+                                                <ion-item>
+                                                    <ion-label position="floating" color="medium">Question name</ion-label>
+                                                    <ion-input id="questionNameInput" type="text"></ion-input>
+                                                </ion-item>
+                                                <ion-item>
+                                                    <ion-label position="floating" color="medium">Question</ion-label>
+                                                    <ion-input id="questionTextInput" type="text"></ion-input>
+                                                </ion-item>
+                                                <ion-item>
+                                                    <ion-label position="floating" color="medium">First answer</ion-label>
+                                                    <ion-input id="firstAnswerInput" type="text"></ion-input>
+                                                </ion-item>
+                                                <ion-item>
+                                                    <ion-label position="floating" color="medium">Second answer</ion-label>
+                                                    <ion-input id="secondAnswerInput" type="text"></ion-input>
+                                                </ion-item>
+                                                <ion-item>
+                                                    <ion-label position="floating" color="medium">Third answer</ion-label>
+                                                    <ion-input id="thirdAnswerInput" type="text"></ion-input>
+                                                </ion-item>
+                                                <ion-item>
+                                                    <ion-label position="floating" color="medium">Fourth answer</ion-label>
+                                                    <ion-input id="fourthAnswerInput" type="text"></ion-input>
+                                                </ion-item>
+                                                <div class="ion-padding ion-text-right">
+                                                    <ion-button id="submitQuestionBtn" color="primary">Login</ion-button>
+                                                </div>
+                                            </ion-card-content>
+                                        </ion-card>
+                                    </ion-card>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-card-content>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
     </ion-content>
 </body>
 </html>
