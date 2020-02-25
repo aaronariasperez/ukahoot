@@ -10,7 +10,6 @@ function killCookie(name){
 
 function getCookie(name){
     var nameEQ = name + "=";
-    //alert(document.cookie);
     var ca = document.cookie.split(';');
     for(var i=0;i < ca.length;i++) {
         var c = ca[i];

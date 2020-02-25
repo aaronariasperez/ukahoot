@@ -1,9 +1,7 @@
 function clearCookies(){
-    var dateExpired = new Date()
-    dateExpired.setMinutes(dateExpired.getMinutes() - 1)
-    document.cookie = 'nickname=any; expires='+dateExpired
-    document.cookie = 'pollid=any; expires='+dateExpired
-    document.cookie = 'token=any; expires='+dateExpired
+    killCookie('nickname')
+    killCookie('pollid')
+    killCookie('token')
 }
 
 function clearErrors(){
