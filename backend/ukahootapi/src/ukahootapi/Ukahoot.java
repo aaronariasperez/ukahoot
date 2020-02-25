@@ -49,10 +49,10 @@ public class Ukahoot {
 	
 	//*****JUGAR ENCUESTA******
 	@POST
-	@Path("/play")
+	@Path("/getApikey")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public PlayResponseJSON play(UserPlayerJSON myUser) {
+	public ApikeyJSON getApikey(UserPlayerJSON myUser) {
 		if(!userPlayer_map.containsKey(myUser.getUser_name())) {
 			UUID apikey = UUID.randomUUID();
 			UserPlayerJSON newUser = new UserPlayerJSON();
@@ -60,15 +60,30 @@ public class Ukahoot {
 			newUser.setApikey(apikey.toString());
 			userPlayer_map.put(newUser.getUser_name(), newUser); 
 			
-			PlayResponseJSON response = new PlayResponseJSON();
+			ApikeyJSON response = new ApikeyJSON();
 			response.setApikey(apikey.toString());
-			response.setPoll_id(myUser.getPoll_id());
-			response.setPoll_name(myUser.getUser_name());
-			response.setQuestions(polls_map.get(myUser.getPoll_id()).getQuestions());
 			
 			return response;
 		}
 		return null;
+	}
+	
+	@POST
+	@Path("/play/{poll_id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public PlayResponseJSON play(UserPlayerJSON myUser) {
+		if(userPlayer_map.get(myUser.getUser_name()).getApikey().equals(myUser.getApikey())) {
+			PlayResponseJSON response = new PlayResponseJSON();
+			response.setApikey(myUser.getApikey());
+			response.setPoll_id(myUser.getPoll_id());
+			response.setPoll_name(polls_map.get(myUser.getPoll_id()).getPoll_name());
+			response.setQuestions(polls_map.get(myUser.getPoll_id()).getQuestions());
+			
+			return response;
+		}else {
+			return null;
+		}
 	}
 	
 	@POST
