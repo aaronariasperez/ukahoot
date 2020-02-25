@@ -47,63 +47,61 @@ public class Ukahoot {
 	
 		userRegistered_map.put(user.getUser(), user);
 		
-		//TODO: REMOVE THIS
-		RankResponseJSON response = new RankResponseJSON();
-		response.setPoll_name("poll de prueba");
-		Rank r1 = new Rank("creator", 123);
-		Rank r2 = new Rank("creator2", 1432);
-		List<Rank> rs = new ArrayList<Rank>();
-		rs.add(r1);
-		rs.add(r2);
-		response.setRanks(rs);
-		ranks_map.put("0", response);
+		//PollJSON poll = new PollJSON();
+		
 	}
 	
-	//*****APIKEY******
-	
-
-	@POST
-	@Path("/lol")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.TEXT_PLAIN)
-	public String getApiKey(@HeaderParam("hello") String hello, UserPlayerJSON user) {
-		/*if(!userPlayer_map.containsKey(myUser.getUser())) {
-			UUID apikey = UUID.randomUUID();
-			UserPlayerJSON newUser = new UserPlayerJSON(myUser.getUser(), apikey.toString());
-			userPlayer_map.put(myUser.getUser(), newUser); 
-			
-			return apikey.toString();
-		}
-		return null;*/
-		return user.getApikey();
-	}
+	//*****JUGAR ENCUESTA******
 	
 	@POST
-	@Path("/apikey")
+	@Path("/play")
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.TEXT_PLAIN)
-	public String getApiKey(UserPlayerJSON myUser) {
-		if(!userPlayer_map.containsKey(myUser.getUser())) {
+	@Produces(MediaType.APPLICATION_JSON)
+	public PlayResponseJSON play(UserPlayerJSON myUser) {
+		if(!userPlayer_map.containsKey(myUser.getUser_name())) {
 			UUID apikey = UUID.randomUUID();
-			UserPlayerJSON newUser = new UserPlayerJSON();//myUser.getUser(), apikey.toString());
-			newUser.setUser(myUser.getUser());
+			UserPlayerJSON newUser = new UserPlayerJSON();
+			newUser.setUser_name(myUser.getUser_name());
 			newUser.setApikey(apikey.toString());
-			userPlayer_map.put(newUser.getUser(), newUser); 
+			userPlayer_map.put(newUser.getUser_name(), newUser); 
 			
-			return apikey.toString();
+			PlayResponseJSON response = new PlayResponseJSON();
+			response.setApikey(apikey.toString());
+			response.setPoll_id(myUser.getPoll_id());
+			response.setPoll_name(myUser.getUser_name());
+			response.setQuestions(polls_map.get(myUser.getPoll_id()).getQuestions());
+			
+			return response;
 		}
 		return null;
 	}
 	
 	@POST
-	@Path("/testApikey1")
+	@Path("/enviar_respuestas")
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.TEXT_PLAIN)
-	public String testing(UserPlayerJSON myUser) {
-		if(userPlayer_map.get(myUser.getUser()).getApikey().equals(myUser.getApikey())) {
-			return "GRANTED";
+	@Produces(MediaType.APPLICATION_JSON)
+	public EnviarEncuestaReponseJSON enviar_respuestas(EnviarEncuestaJSON encuesta) {
+		if(userPlayer_map.get(encuesta.getUser_name()).getApikey().equals(encuesta.getApikey())) {
+			int score = 0;
+			for(int i = 0; i < encuesta.getAnswers().size();i++) {
+				if(polls_map.get(encuesta.getPoll_id()).getQuestions().get(i).getSolution().endsWith(Integer.toString(encuesta.getAnswers().get(i)))) {
+					score += 10;
+				}
+			}
+			
+			Rank r = new Rank(encuesta.getUser_name(), score);
+			
+			ranks_map.get(encuesta.getPoll_id()).getRanks().add(r);
+			
+			EnviarEncuestaReponseJSON response = new EnviarEncuestaReponseJSON();
+			response.setResponse("Respuestas enviadas correctamente");
+			
+			return response;
 		}else {
-			return "DENIED: ";
+			EnviarEncuestaReponseJSON response = new EnviarEncuestaReponseJSON();
+			response.setResponse("Acceso denegado por no coincidencia con la api");
+			
+			return response;
 		}
 	}
 	
@@ -176,6 +174,11 @@ public class Ukahoot {
 		}catch(InvalidJwtException e) {
 			return null;
 		}
+		RankResponseJSON rankresponse = new RankResponseJSON();
+		rankresponse.setPoll_name(poll.getPoll_name());
+		rankresponse.setRanks(new ArrayList<Rank>());
+		ranks_map.put(Integer.toString(polls_id), rankresponse);
+		
 		PollResponseJSON response = new PollResponseJSON();
 		String generated = Integer.toString(polls_id);
 		polls_id++;
@@ -191,8 +194,6 @@ public class Ukahoot {
 	@Path("/ranking/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public RankResponseJSON ranking(@PathParam("id") String id) {
-		System.out.println("hello");
 		return ranks_map.get(id);
 	}
-	
 }

@@ -7,6 +7,14 @@ public class Question {
 	private String answer2;
 	private String answer3;
 	private String answer4;
+	private String solution;
+	
+	public String getSolution() {
+		return solution;
+	}
+	public void setSolution(String solution) {
+		this.solution = solution;
+	}
 	public String getQuestion_name() {
 		return question_name;
 	}
