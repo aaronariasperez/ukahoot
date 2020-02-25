@@ -1,3 +1,15 @@
+function assertCookies() {
+    var nickname = getCookie('nickname')
+    var pollid = getCookie('pollid')
+    var token = getCookie('token')
+
+    if (nickname == null || nickname.length <= 0)
+        error('Invalid input', 'Must provide a nickname.')
+    if (pollid == null || pollid.length <= 0)
+        error('Invalid input', 'Must provide a valid poll identifier.')
+    if (token == null || token.length <= 5)
+        error('Forbidden access', 'Area restricted. Invalid session token.')
+}
 
 function initComponents(pollData){
     $('#pollNameTitle').text(pollData.poll_name)
@@ -11,19 +23,6 @@ function fillQuestionForm(questionData){
     $('#secondAnswerBtn').text(questionData.answer2)
     $('#thirdAnswerBtn').text(questionData.answer3)
     $('#fourthAnswerBtn').text(questionData.answer4)   
-}
-
-function assertCookies() {
-    var nickname = getCookie('nickname')
-    var pollid = getCookie('pollid')
-    var token = getCookie('token')
-
-    if (nickname == null || nickname.length <= 0)
-        error('Invalid input', 'Must provide a nickname.')
-    if (pollid == null || pollid.length <= 0)
-        error('Invalid input', 'Must provide a valid poll identifier.')
-    if (token == null || token.length <= 5)
-        error('Forbidden access', 'Area restricted. Invalid session token.')
 }
 
 function nextQuestion(currentQuestion, maxQuestions, questions){
