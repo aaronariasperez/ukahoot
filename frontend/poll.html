@@ -19,29 +19,43 @@
                 <ion-title class="ion-text-center"><span id="pollNameTitle"></span> - Poll identifier: <span id="pollidTitle"></span></ion-title>
             </ion-toolbar>
         </ion-header>
+        <div>
+            <ion-grid class="my-grid">
+                <ion-row class="parent-row">
+                    <ion-col size=8>
+                        <ion-card>
+                            <ion-item><ion-card-header><ion-card-title id="pollQuestionTitle"></ion-card-title></ion-card-header></ion-item>
+                            <ion-card-content>
+                                <ion-text id="pollQuestionText"></ion-text>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="parent-row">
+                    <ion-col size=8>
+                        <ion-item>
+                            <ion-grid class="ion-padding">
+                                <ion-row class="ion-text-center">
+                                    <ion-col><ion-button fill="solid" id="firstAnswerBtn">1</ion-button></ion-col>
+                                    <ion-col><ion-button fill="solid" id="secondAnswerBtn">2</ion-button></ion-col>
+                                </ion-row>
+                                <ion-row class="ion-text-center">
+                                    <ion-col><ion-button fill="solid" id="thirdAnswerBtn">3</ion-button></ion-col>
+                                    <ion-col><ion-button fill="solid" id="fourthAnswerBtn">4</ion-button></ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="parent-row">
+                    <ion-col size=8>
+                        <ion-button onClick="toIndex()"><ion-icon name="arrow-back-outline"></ion-icon>Go back</ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
 
-        <ion-card>
-            <ion-item><ion-card-header><ion-card-title id="pollQuestionTitle"></ion-card-title></ion-card-header></ion-item>
-            <ion-card-content>
-                <ion-text id="pollQuestionText"></ion-text>
-            </ion-card-content>
-        </ion-card>
-
-        <ion-grid class="ion-padding">
-            <ion-row class="ion-text-center">
-                <ion-col><ion-button fill="solid" id="firstAnswerBtn">1</ion-button></ion-col>
-                <ion-col><ion-button fill="solid" id="secondAnswerBtn">2</ion-button></ion-col>
-            </ion-row>
-            <ion-row class="ion-text-center">
-                <ion-col><ion-button fill="solid" id="thirdAnswerBtn">3</ion-button></ion-col>
-                <ion-col><ion-button fill="solid" id="fourthAnswerBtn">4</ion-button></ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>
-                    <ion-button onClick="toIndex()"><ion-icon name="arrow-back-outline"></ion-icon>Go back</ion-button>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
+        
     </ion-content>
 </body>
 </html>

@@ -21,16 +21,29 @@
                 <ion-title>Poll <span id="pollNameTitle"></span> score ranking</ion-title>
             </ion-toolbar>
         </ion-header>
-        
-
-        <ion-item>
-            <ion-text color="dark"><h1>High scores</h1></ion-text>
-        </ion-item>
-
-        <div class="ion-padding">
-            <ion-grid id="highScoresList" class="my-grid"></ion-grid>
+        <div>
+        <ion-grid class="my-grid">
+            <ion-row class="parent-row">
+                <ion-col size=8>
+                    <ion-card>
+                        <ion-item>
+                            <ion-card-header>
+                                <ion-card-title>High scores</ion-card-title>
+                            </ion-card-header>
+                        </ion-item>
+                            <div class="ion-padding">
+                                <ion-grid id="highScoresList" class="my-grid"></ion-grid>
+                            </div>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+            <ion-row class="parent-row">
+                <ion-col size=8>
+                    <ion-button class="ion-padding" onClick="toIndex()"><ion-icon name="arrow-back-outline"></ion-icon>Go back</ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
         </div>
-        <ion-button class="ion-padding" onClick="toIndex()"><ion-icon name="arrow-back-outline"></ion-icon>Go back</ion-button>
     </ion-content>
 </body>
 </html>
