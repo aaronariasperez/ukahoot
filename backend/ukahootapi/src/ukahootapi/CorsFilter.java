@@ -32,23 +32,3 @@ public class CorsFilter implements Filter {
         chain.doFilter(request, servletResponse);
     }
 }
-
-/*
-@Provider
-public class CorsFilter implements Filter {
- 
-    @Override
-    public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
-          responseContext.getHeaders().add(
-            "Access-Control-Allow-Origin", "http://localhost");
-          responseContext.getHeaders().add(
-            "Access-Control-Allow-Credentials", "true");
-          responseContext.getHeaders().add(
-           "Access-Control-Allow-Headers",
-           "Content-Type, Authorization, X-Requested-With");
-          responseContext.getHeaders().add(
-            "Access-Control-Allow-Methods", 
-            "GET, POST, PUT, DELETE, OPTIONS, HEAD");
-    }
-}
-*/
