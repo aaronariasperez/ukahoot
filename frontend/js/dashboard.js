@@ -90,7 +90,7 @@ function clearSubmitPollInput(){
 }
 
 function displayPoll(pollData, pollCounter){
-    $('#pollList').append('<ion-item><ion-text color="dark">'+(pollCounter+1)+'. '+pollData.poll_name+' - ID:<b>'+pollData.poll_id+'</b></ion-text><ion-item>')
+    $('#pollList').append('<ion-item><ion-text color="dark">'+(pollCounter+1)+'. '+pollData.poll_name+' - ID: <b>'+pollData.poll_id+'</b></ion-text><ion-item>')
     $('#pollList').show()
     $('#noPollsYetText').hide()
 }
@@ -101,7 +101,7 @@ $(document).ready(function (){
     var username = getCookie('username')
     var token = getCookie('token')
 
-    var uriEncuesta = "http://localhost:8080/ukahootapi/public/api/encuesta"
+    var uriEncuesta = "https://localhost:8443/ukahootapi/public/api/encuesta"
 
     initComponents(username)
     

@@ -74,8 +74,8 @@ $(document).ready(function (){
     clearCookies()
     initComponents()
 
-    var uriApikey = "http://localhost:8080/ukahootapi/public/api/getApikey"
-    var uriAuth = "http://localhost:8080/ukahootapi/public/api/auth"
+    var uriApikey = "https://localhost:8443/ukahootapi/public/api/getApikey"
+    var uriAuth = "https://localhost:8443/ukahootapi/public/api/auth"
 
     $('#rankingBtn').click(function (){
         var pollid = $('#pollidInput').val()

@@ -38,7 +38,7 @@ function submitPoll(userAnswers){
     userAnswers.apikey = getCookie('token')
     userAnswers.user_name = getCookie('nickname')
 
-    var uriEnviarRespuestas='http://localhost:8080/ukahootapi/public/api/enviar_respuestas'
+    var uriEnviarRespuestas='https://localhost:8443/ukahootapi/public/api/enviar_respuestas'
 
     $.ajax({
         url:uriEnviarRespuestas,
@@ -62,7 +62,7 @@ function submitPoll(userAnswers){
 $(document).ready(function (){
     assertCookies()
     
-    var uriPlay = "http://localhost:8080/ukahootapi/public/api/play"
+    var uriPlay = "https://localhost:8443/ukahootapi/public/api/play"
 
     var nickname = getCookie('nickname')
     var pollid = getCookie('pollid')
