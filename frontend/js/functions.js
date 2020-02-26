@@ -27,3 +27,10 @@ function error(errorTitle, errorMessage){
 
     window.location.href = "error.html";
 }
+
+function toIndex(){
+    killCookie('nickname')
+    killCookie('pollid')
+    killCookie('token')
+    window.location.href = "index.html";
+}

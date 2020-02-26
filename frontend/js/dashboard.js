@@ -90,7 +90,7 @@ function clearSubmitPollInput(){
 }
 
 function displayPoll(pollData, pollCounter){
-    $('#pollList').append('<ion-item><ion-text color="dark">'+(pollCounter+1)+'. '+pollData.poll_name+' - '+pollData.poll_id+'</ion-text><ion-item>')
+    $('#pollList').append('<ion-item><ion-text color="dark">'+(pollCounter+1)+'. '+pollData.poll_name+' - ID:<b>'+pollData.poll_id+'</b></ion-text><ion-item>')
     $('#pollList').show()
     $('#noPollsYetText').hide()
 }
@@ -169,6 +169,7 @@ $(document).ready(function (){
         displayPoll(pollData, pollCounter)
         clearSubmitPollInput()
         pollCounter += 1
+        questionCounter = 0
         pollData = {
             poll_id:'',
             poll_name:'',
